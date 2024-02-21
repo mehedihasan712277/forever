@@ -7,12 +7,12 @@ const Sidebar = () => {
         <>
             <div className=''>
                 {/* horizontal --------------------*/}
-                <div className='h-20 fixed top-0 bg-white w-full flex justify-between items-center px-32'>
+                <div className='h-[15vh] fixed top-0 bg-white w-full flex justify-between items-center px-32'>
                     <p>Forever BD Store</p>
                     <p>Sakib Akondo</p>
                 </div>
                 {/* vertical---------------------- */}
-                <div className='fixed left-0 top-20  w-64 h-full'>
+                <div className='fixed left-0 top-[15vh]  w-64 h-full'>
                     <NavLink to="/" className={({ isActive }) => isActive ? " text-cyan-500" : " text-gray-500"}>
                         <div className='flex items-center gap-2 hover:bg-cyan-100 hover:text-gray-800 px-6 p-2 font-bold m-2 rounded-full'>
                             <p><FaCartArrowDown /></p>

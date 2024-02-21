@@ -1,8 +1,17 @@
 import React from 'react'
 
 const Add = () => {
+    const handleAdd = () => {
+
+    }
     return (
-        <div>Add</div>
+        <>
+            <div>
+                <form >
+                    hi
+                </form>
+            </div>
+        </>
     )
 }
 
