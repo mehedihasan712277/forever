@@ -5,9 +5,9 @@ import { FaCartArrowDown, FaImage, FaPlusCircle, FaShoppingBag, FaShoppingCart }
 const Sidebar = () => {
     return (
         <>
-            <div className=''>
+            <div>
                 {/* horizontal --------------------*/}
-                <div className='h-[15vh] fixed top-0 bg-white w-full flex justify-between items-center px-32'>
+                <div className='h-[15vh] z-10 fixed top-0 bg-white w-full flex justify-between items-center px-32'>
                     <p>Forever BD Store</p>
                     <p>Sakib Akondo</p>
                 </div>
