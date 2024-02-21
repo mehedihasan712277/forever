@@ -45,7 +45,7 @@ const Add = () => {
             <div>
                 <section>
                     <div class="max-w-2xl px-4 py-8 mx-auto lg:py-16">
-                        <h2 class="mb-4 text-xl font-bold text-gray-900">Add product</h2>
+                        <p class="mb-4 text-2xl text-center font-bold text-cyan-400">Add product</p>
                         <form onSubmit={handleAddProduct}>
                             <div class="grid gap-4 mb-4 sm:grid-cols-2 sm:gap-6 sm:mb-5">
                                 <div class="sm:col-span-2">
@@ -99,7 +99,7 @@ const Add = () => {
                                     <textarea id="description" rows="8" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-primary-500 focus:border-primary-500" placeholder="Write a product description here..."></textarea>
                                 </div>
                             </div>
-                            <div class="flex items-center space-x-4">
+                            <div class="flex items-center justify-center">
                                 <button type="submit" class="text-cyan-500 inline-flex items-center hover:text-white border border-cyan-500 hover:bg-cyan-500 font-medium rounded-lg text-sm px-5 py-2.5 text-center">
                                     Add
                                 </button>
