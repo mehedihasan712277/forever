@@ -22,7 +22,7 @@ const allRoute = createBrowserRouter([
         element: <Orders></Orders>
       },
       {
-        path: "/allproduct",
+        path: "/allproducts",
         element: <AllProducts></AllProducts>
       },
       {
@@ -51,9 +51,9 @@ const allRoute = createBrowserRouter([
 
 const App = () => {
   return (
-    <AuthProvider>
+    <>
       <RouterProvider router={allRoute}></RouterProvider>
-    </AuthProvider>
+    </>
   )
 }
 
