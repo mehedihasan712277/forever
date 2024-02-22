@@ -3,6 +3,7 @@ import axios from "axios";
 const Orders = () => {
     const [activeIndex, setActiveIndex] = useState(0);
     const [data, setData] = useState([]);
+    const [total, setTotal] = useState(0);
     const [loading, setLoading] = useState(true);
 
 
@@ -10,7 +11,18 @@ const Orders = () => {
     useEffect(() => {
         axios.get(`https://server-forever.vercel.app/control_order`)
             .then(res => {
-                setData(res.data);
+                setTotal(res.data.length);
+                const groupedObjects = {};
+                res.data.forEach(obj => {
+                    if (groupedObjects[obj.tuid]) {
+                        groupedObjects[obj.tuid].push(obj);
+                    } else {
+                        groupedObjects[obj.tuid] = [obj];
+                    }
+                });
+                const x = Object.values(groupedObjects);
+                setData(x)
+                // setData(res.data);
                 setLoading(false);
             })
     }, [])
@@ -32,7 +44,7 @@ const Orders = () => {
                 {/* ----------------------title--------------------- */}
                 <div className='flex gap-4 items-baseline'>
                     <p className='text-2xl font-bold text-gray-700'>Orders</p>
-                    <p className='text-gray-500 text-sm font-semibold'>{data.length} order(s) found</p>
+                    <p className='text-gray-500 text-sm font-semibold'>{data.length} order(s) and {total} product(s)</p>
                 </div>
                 {/* -------------------category name-------------------- */}
                 <div className='flex gap-4 mt-8'>
@@ -62,37 +74,43 @@ const Orders = () => {
                         <tbody>
                             {/* row 1 */}
                             {
-                                data.map((ele, index) => {
-                                    return <tr key={ele._id}>
-                                        <th>
-                                            {index + 1}
-                                        </th>
-                                        <td>NU0001</td>
-                                        <td>
-                                            <div className="flex items-center gap-3">
-                                                <div className="avatar">
-                                                    <div className="mask w-12 h-12">
-                                                        <img src={ele.img1} alt="Avatar Tailwind CSS Component" />
+                                data.map((e, i) => {
+                                    return e.map((ele, index) => {
+                                        return <tr key={ele._id} className={(i) % 2 === 0 ? "bg-gray-200" : "bg-white"}>
+                                            <th>
+                                                {index + 1}
+                                            </th>
+                                            <td>NU0001</td>
+                                            <td>
+                                                <div className="flex items-center gap-3">
+                                                    <div className="avatar">
+                                                        <div className="mask w-12 h-12">
+                                                            <img src={ele.img1} alt="Avatar Tailwind CSS Component" />
+                                                        </div>
+                                                    </div>
+                                                    <div>
+                                                        <div className="font-bold">{ele.productName}</div>
                                                     </div>
                                                 </div>
-                                                <div>
-                                                    <div className="font-bold">{ele.productName}</div>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <span>{ele.address.house}</span>
-                                            <br />
-                                            <span>{ele.address.policeStation}{ele.address.district}{ele.address.division}</span>
-                                            <br />
-                                            <span className="">{ele.address.phone}</span>
-                                        </td>
-                                        <td>{ele.address.date}</td>
-                                        <td>{ele.reducedPrice}</td>
-                                        <th>
-                                            <button className="btn btn-outline btn-xs">{ele.status}</button>
-                                        </th>
-                                    </tr>
+                                            </td>
+                                            <td>
+                                                <span>{ele.address.house}</span>
+                                                <br />
+                                                <span>{ele.address.policeStation}{ele.address.district}{ele.address.division}</span>
+                                                <br />
+                                                <span className="">{ele.address.phone}</span>
+                                            </td>
+                                            <td>
+                                                {ele.address.date}
+                                                <br />
+                                                {ele.address.time}
+                                            </td>
+                                            <td>{ele.reducedPrice}</td>
+                                            <th>
+                                                <button className="btn btn-outline btn-xs">{ele.status}</button>
+                                            </th>
+                                        </tr>
+                                    })
                                 })
                             }
                         </tbody>

@@ -104,8 +104,8 @@ const Add = () => {
                                     <input type="number" name="sold" id="item-weight" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" placeholder="Ex. 12" required />
                                 </div>
                                 <div className="sm:col-span-2">
-                                    <label htmlFor="description" className="block mb-2 text-sm font-medium text-gray-900">Description</label>
-                                    <textarea id="description" rows="8" className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-primary-500 focus:border-primary-500" placeholder="Write a product description here..."></textarea>
+                                    <label htmlFor="descriptions" className="block mb-2 text-sm font-medium text-gray-900">Description</label>
+                                    <textarea id="descriptions" name='description' rows="8" className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-primary-500 focus:border-primary-500" placeholder="Write a product description here..."></textarea>
                                 </div>
                             </div>
                             <div className="flex items-center justify-center">
