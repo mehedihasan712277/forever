@@ -109,7 +109,7 @@ const Add = () => {
                                 </div>
                                 <div className="sm:col-span-2">
                                     <label htmlFor="descriptions" className="block mb-2 text-sm font-medium text-gray-900">Description</label>
-                                    <textarea id="descriptions" name='description' rows="8" className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-primary-500 focus:border-primary-500" placeholder="Write a product description here..."></textarea>
+                                    <textarea id="descriptions" name='description' rows="8" className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-primary-500 focus:border-primary-500" placeholder="Short description# Main description"></textarea>
                                 </div>
                             </div>
                             <div className="flex items-center justify-center">

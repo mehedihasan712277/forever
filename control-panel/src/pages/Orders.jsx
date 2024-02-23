@@ -127,7 +127,7 @@ const Orders = () => {
                                                             {
                                                                 e.length > 1
                                                                     ?
-                                                                    !Boolean(index)
+                                                                    index === 0
                                                                         ?
                                                                         <>
                                                                             <div>{ele.status === "placed" && <button className="btn border-yellow-300 bg-yellow-300 btn-sm rounded-full w-24">Confirm</button>}</div>
