@@ -130,20 +130,19 @@ const Orders = () => {
                                                                     !Boolean(index)
                                                                         ?
                                                                         <>
-                                                                            <div>{ele.status === "placed" && <button className="btn btn-outline btn-xs">Confirm</button>}</div>
-                                                                            <div>{ele.status === "confirmed" && <button className="btn btn-outline btn-xs">Send</button>}</div>
-                                                                            <div>{ele.status === "processing" && <button className="btn btn-outline btn-xs">Completed</button>}</div>
+                                                                            <div>{ele.status === "placed" && <button className="btn border-yellow-300 bg-yellow-300 btn-sm rounded-full w-24">Confirm</button>}</div>
+                                                                            <div>{ele.status === "confirmed" && <button className="btn border-green-400 bg-green-400 btn-sm rounded-full w-24">Send</button>}</div>
+                                                                            <div>{ele.status === "processing" && <button className="btn border-red-500 bg-red-500 btn-sm rounded-full w-24">Completed</button>}</div>
                                                                         </>
                                                                         :
                                                                         ""
                                                                     :
                                                                     <>
-                                                                        <div>{ele.status === "placed" && <button className="btn btn-outline btn-xs">Confirm</button>}</div>
-                                                                        <div>{ele.status === "confirmed" && <button className="btn btn-outline btn-xs">Send</button>}</div>
-                                                                        <div>{ele.status === "processing" && <button className="btn btn-outline btn-xs">Completed</button>}</div>
+                                                                        <div>{ele.status === "placed" && <button className="btn border-yellow-300 bg-yellow-300 btn-sm rounded-full w-24">Confirm</button>}</div>
+                                                                        <div>{ele.status === "confirmed" && <button className="btn border-green-400 bg-green-400 btn-sm rounded-full w-24">Send</button>}</div>
+                                                                        <div>{ele.status === "processing" && <button className="btn border-red-500 bg-red-500 btn-sm rounded-full w-24">Completed</button>}</div>
                                                                     </>
                                                             }
-                                                            {/* </button> */}
                                                         </th>
                                                     </tr>
                                                 })
