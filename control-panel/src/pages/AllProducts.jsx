@@ -59,24 +59,38 @@ const AllProducts = () => {
                             {
                                 data.map(ele => {
                                     return <div key={ele._id} className='bg-[#D2E9E9] p-2 ml:p-3 xl:p-4 rounded-md'>
-                                        <div className='w-32 mm:w-40 lg:w-44 xl:w-48 h-full flex flex-col justify-between'>
-                                            <div>
-                                                <div className='h-36 lg:h-40 xl:h-52 bg-white rounded-md'>
-                                                    <img src={ele.img1} alt="img" className='h-36 lg:h-40 xl:h-52 w-full rounded-md' />
+                                        <div className='-32 mm:w-40 lg:w-44 xl:w-48 h-full flex flex-col justify-between'>
+                                            <Link to={`/details/${ele._id}`} state={
+                                                {
+                                                    productId: ele._id,
+                                                    productName: ele.productName,
+                                                    description: ele.description,
+                                                    img1: ele.img1,
+                                                    img2: ele.img2,
+                                                    img3: ele.img3,
+                                                    img4: ele.img4,
+                                                    regularPrice: ele.regularPrice,
+                                                    reducedPrice: ele.reducedPrice
+                                                }
+                                            }>
+                                                <div>
+                                                    <div className='h-36 lg:h-40 xl:h-52 bg-white rounded-md'>
+                                                        <img src={ele.img1} alt="img" className='h-36 lg:h-40 xl:h-52 w-full rounded-md' />
+                                                    </div>
+                                                    <p className='text-xs md:text-sm lg:text-lg font-bold'>{ele.productName}</p>
+                                                    <div className='flex flex-wrap gap-1 md:gap-2 xl:gap-1 text-xs xl:text-sm'>
+                                                        <p>Price(Tk): {ele.reducedPrice}</p>
+                                                        <del className='text-gray-500'>{ele.regularPrice}</del>
+                                                        <p className='text-red-700'>
+                                                            {
+                                                                Number.parseInt(((ele.regularPrice - ele.reducedPrice) / ele.reducedPrice) * 100)
+                                                            }
+                                                            %off
+                                                        </p>
+                                                    </div>
+                                                    <p>Sold: {ele.sold}</p>
                                                 </div>
-                                                <p className='text-xs md:text-sm lg:text-lg font-bold'>{ele.productName}</p>
-                                                <div className='flex flex-wrap gap-1 md:gap-2 xl:gap-1 text-xs xl:text-sm'>
-                                                    <p>Price(Tk): {ele.reducedPrice}</p>
-                                                    <del className='text-gray-500'>{ele.regularPrice}</del>
-                                                    <p className='text-red-700'>
-                                                        {
-                                                            Number.parseInt(((ele.regularPrice - ele.reducedPrice) / ele.reducedPrice) * 100)
-                                                        }
-                                                        %off
-                                                    </p>
-                                                </div>
-                                                <p>Sold: {ele.sold}</p>
-                                            </div>
+                                            </Link>
 
                                             <div className='flex justify-between gap-1'>
                                                 <button onClick={() => handleDeleteProduct(ele._id)} className=' btn btn-sm text-[#374259] bg-transparent border-none shadow-none'><BsBackspaceReverseFill className='text-xl' /></button>

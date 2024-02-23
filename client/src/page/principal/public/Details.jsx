@@ -17,7 +17,6 @@ const Details = () => {
                 userId: user.uid,
                 userName: user.displayName,
             }
-            console.log(addedProductInfo);
             axios.post(`https://server-forever.vercel.app/products`, addedProductInfo)
                 .then(res => {
                     Swal.fire({
