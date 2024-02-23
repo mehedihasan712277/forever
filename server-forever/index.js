@@ -173,6 +173,19 @@ async function run() {
             const result = await database.updateOne(filter, updatedData, options);
             res.send(result);
         })
+        app.put("/control_status/:id", async (req, res) => {
+            const data = req.body;
+            const id = req.params.id;
+            const filter = { tuid: id };
+            const updatedData = {
+                $set: {
+                    status: data.status
+                }
+            }
+            const result = await database3.updateMany(filter, updatedData);
+            res.send(result);
+
+        })
         app.get("/control_cart", async (req, res) => {
             const result = await database2.find().toArray();
             res.send(result);

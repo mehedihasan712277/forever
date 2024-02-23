@@ -1,16 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import axios from "axios";
 import { FiRefreshCw } from "react-icons/fi";
+import { BsFillCartXFill } from "react-icons/bs";
 
 const Orders = () => {
-    const [activeIndex, setActiveIndex] = useState(0);
+    const [activeIndex, setActiveIndex] = useState("all");
     const [data, setData] = useState([]);
+    const [filtredData, setFiltredData] = useState(data);
     const [total, setTotal] = useState(0);
     const [loading, setLoading] = useState(true);
     const [refresh, setrefresh] = useState(false)
 
 
-
+    // --------------------load order info-----------------------------------------
     useEffect(() => {
         axios.get(`https://server-forever.vercel.app/control_order`)
             .then(res => {
@@ -24,23 +26,40 @@ const Orders = () => {
                     }
                 });
                 const x = Object.values(groupedObjects);
-                setData(x)
-                // setData(res.data);
+                setData(x);
+                setFiltredData(x);
                 setLoading(false);
+                setActiveIndex("all");
             })
     }, [refresh])
+    // -----------------------loader------------------------------------------------
     if (loading) {
-        return <div class="flex items-center justify-center min-h-[85vh] w-full">
-            <div class="px-3 py-1 text-xs font-medium leading-none text-center text-blue-800 bg-blue-200 rounded-full animate-pulse dark:bg-blue-900 dark:text-blue-200">loading...</div>
+        return <div className="flex items-center justify-center min-h-[85vh] w-full">
+            <div className="px-3 py-1 text-xs font-medium leading-none text-center text-blue-800 bg-blue-200 rounded-full animate-pulse dark:bg-blue-900 dark:text-blue-200">loading...</div>
         </div>
 
     }
-
-
+    // -----------------------filter the order---------------------------------------
     const handleClick = (index) => {
         setActiveIndex(index);
+        if (index === "all") {
+            setFiltredData(data);
+        }
+        else {
+            const filtredOrder = data.filter(ele => ele[0].status === index);
+            setFiltredData(filtredOrder);
+        }
     };
-
+    // -----------------------update status------------------------------------------
+    const handleStatus = (val, tuid) => {
+        setLoading(true);
+        const newStatus = { status: val }
+        axios.put(`https://server-forever.vercel.app/control_status/${tuid}`, newStatus)
+            .then(res => {
+                setrefresh(!refresh);
+                setLoading(false);
+            })
+    }
     return (
         <>
             <div className='p-4'>
@@ -65,10 +84,31 @@ const Orders = () => {
                     Boolean(data.length) ?
                         <>
                             <div className='flex gap-4 mt-8'>
-                                <p className={activeIndex === 0 ? "text-cyan-400 font-bold p-1 border-b-2 border-cyan-400 transition duration-150" : "transition duration-150 cursor-pointer text-gray-500 font-bold p-1 border-b-2 border-transparent"} onClick={() => handleClick(0)}>All Orders</p>
-                                <p className={activeIndex === 1 ? "text-cyan-400 font-bold p-1 border-b-2 border-cyan-400 transition duration-150" : "transition duration-150 cursor-pointer text-gray-500 font-bold p-1 border-b-2 border-transparent"} onClick={() => handleClick(1)}>Confirmed</p>
-                                <p className={activeIndex === 2 ? "text-cyan-400 font-bold p-1 border-b-2 border-cyan-400 transition duration-150" : "transition duration-150 cursor-pointer text-gray-500 font-bold p-1 border-b-2 border-transparent"} onClick={() => handleClick(2)}>On the way</p>
-                                <p className={activeIndex === 3 ? "text-cyan-400 font-bold p-1 border-b-2 border-cyan-400 transition duration-150" : "transition duration-150 cursor-pointer text-gray-500 font-bold p-1 border-b-2 border-transparent"} onClick={() => handleClick(3)}>Completed</p>
+                                <p onClick={() => handleClick("all")}
+                                    className={activeIndex === "all" ? "text-cyan-600 font-semibold p-1 border-b-2 border-cyan-600 transition ease-in-out delay-150" : "transition ease-in-out delay-150 cursor-pointer text-gray-500 font-semibold p-1 border-b-2 border-transparent"}>
+                                    All Orders
+                                    {activeIndex === "all" && ` (${filtredData.length})`}
+                                </p>
+                                <p onClick={() => handleClick("placed")}
+                                    className={activeIndex === "placed" ? "text-cyan-600 font-semibold p-1 border-b-2 border-cyan-600 transition ease-in-out delay-150" : "transition ease-in-out delay-150 cursor-pointer text-gray-500 font-semibold p-1 border-b-2 border-transparent"}>
+                                    Placed
+                                    {activeIndex === "placed" && ` (${filtredData.length})`}
+                                </p>
+                                <p onClick={() => handleClick("confirmed")}
+                                    className={activeIndex === "confirmed" ? "text-cyan-600 font-semibold p-1 border-b-2 border-cyan-600 transition ease-in-out delay-150" : "transition ease-in-out delay-150 cursor-pointer text-gray-500 font-semibold p-1 border-b-2 border-transparent"}>
+                                    Confirmed
+                                    {activeIndex === "confirmed" && ` (${filtredData.length})`}
+                                </p>
+                                <p onClick={() => handleClick("processing")}
+                                    className={activeIndex === "processing" ? "text-cyan-600 font-semibold p-1 border-b-2 border-cyan-600 transition ease-in-out delay-150" : "transition ease-in-out delay-150 cursor-pointer text-gray-500 font-semibold p-1 border-b-2 border-transparent"}>
+                                    On the way
+                                    {activeIndex === "processing" && ` (${filtredData.length})`}
+                                </p>
+                                <p onClick={() => handleClick("delivered")}
+                                    className={activeIndex === "delivered" ? "text-cyan-600 font-semibold p-1 border-b-2 border-cyan-600 transition ease-in-out delay-150" : "transition ease-in-out delay-150 cursor-pointer text-gray-500 font-semibold p-1 border-b-2 border-transparent"}>
+                                    Completed
+                                    {activeIndex === "delivered" && ` (${filtredData.length})`}
+                                </p>
                             </div>
 
                             <div className="overflow-x-auto">
@@ -90,11 +130,22 @@ const Orders = () => {
                                     <tbody>
                                         {/* row 1 */}
                                         {
-                                            data.map((e, i) => {
+                                            filtredData.map((e, i) => {
                                                 return e.map((ele, index) => {
                                                     return <tr key={ele._id} className={(i) % 2 === 0 ? "bg-gray-200" : "bg-white"}>
                                                         <th>
-                                                            {index + 1}
+                                                            {/* {index + 1} */}
+                                                            {
+                                                                e.length > 1
+                                                                    ?
+                                                                    index === 0
+                                                                        ?
+                                                                        `${i + 1}.`
+                                                                        :
+                                                                        ""
+                                                                    :
+                                                                    `${i + 1}.`
+                                                            }
                                                         </th>
                                                         <td>NU0001</td>
                                                         <td>
@@ -123,24 +174,23 @@ const Orders = () => {
                                                         </td>
                                                         <td>{ele.reducedPrice}</td>
                                                         <th>
-                                                            {/* <button className="btn btn-outline btn-xs"> */}
                                                             {
                                                                 e.length > 1
                                                                     ?
                                                                     index === 0
                                                                         ?
                                                                         <>
-                                                                            <div>{ele.status === "placed" && <button className="btn border-yellow-300 bg-yellow-300 btn-sm rounded-full w-24">Confirm</button>}</div>
-                                                                            <div>{ele.status === "confirmed" && <button className="btn border-green-400 bg-green-400 btn-sm rounded-full w-24">Send</button>}</div>
-                                                                            <div>{ele.status === "processing" && <button className="btn border-red-500 bg-red-500 btn-sm rounded-full w-24">Completed</button>}</div>
+                                                                            <div>{ele.status === "placed" && <button onClick={() => handleStatus("confirmed", ele.tuid)} className="btn border-yellow-300 bg-yellow-300 btn-sm rounded-full w-24">Confirm</button>}</div>
+                                                                            <div>{ele.status === "confirmed" && <button onClick={() => handleStatus("processing", ele.tuid)} className="btn border-green-400 bg-green-400 btn-sm rounded-full w-24">Send</button>}</div>
+                                                                            <div>{ele.status === "processing" && <button onClick={() => handleStatus("delivered", ele.tuid)} className="btn border-red-500 bg-red-500 btn-sm rounded-full w-24">Completed</button>}</div>
                                                                         </>
                                                                         :
                                                                         ""
                                                                     :
                                                                     <>
-                                                                        <div>{ele.status === "placed" && <button className="btn border-yellow-300 bg-yellow-300 btn-sm rounded-full w-24">Confirm</button>}</div>
-                                                                        <div>{ele.status === "confirmed" && <button className="btn border-green-400 bg-green-400 btn-sm rounded-full w-24">Send</button>}</div>
-                                                                        <div>{ele.status === "processing" && <button className="btn border-red-500 bg-red-500 btn-sm rounded-full w-24">Completed</button>}</div>
+                                                                        <div>{ele.status === "placed" && <button onClick={() => handleStatus("confirmed", ele.tuid)} className="btn border-yellow-300 bg-yellow-300 btn-sm rounded-full w-24">Confirm</button>}</div>
+                                                                        <div>{ele.status === "confirmed" && <button onClick={() => handleStatus("processing", ele.tuid)} className="btn border-green-400 bg-green-400 btn-sm rounded-full w-24">Send</button>}</div>
+                                                                        <div>{ele.status === "processing" && <button onClick={() => handleStatus("delivered", ele.tuid)} className="btn border-red-500 bg-red-500 btn-sm rounded-full w-24">Completed</button>}</div>
                                                                     </>
                                                             }
                                                         </th>
@@ -153,7 +203,12 @@ const Orders = () => {
                             </div>
                         </>
                         :
-                        <p className='font-bold mt-52 text-center'>No order</p>
+                        <div className='font-bold mt-52 flex flex-col items-center'>
+                            <p className='text-7xl text-cyan-400'>
+                                <BsFillCartXFill />
+                            </p>
+                            <p className='text-xl'>No order to show</p>
+                        </div>
                 }
             </div>
         </>
