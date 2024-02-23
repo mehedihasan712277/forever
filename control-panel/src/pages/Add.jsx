@@ -48,8 +48,12 @@ const Add = () => {
             <div>
                 {
                     loading &&
-                    <div className='fixed top-0 left-0 w-full h-screen z-20 text-center' style={{ background: 'linear-gradient(to right, rgba(0,0,0,0.5), rgba(0,0,0,0.5))' }}>
-                        <span className="absolute -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2 bg-cyan-500 loading loading-infinity loading-lg"></span>
+                    <div className='fixed top-0 left-0 w-full h-screen z-20 text-center' style={{ background: 'linear-gradient(to right, rgba(0,0,0,0.7), rgba(0,0,0,0.7))' }}>
+                        {/* <span className="absolute -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2 bg-cyan-500 loading loading-infinity loading-lg"></span> */}
+                        <div className='text-white absolute -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2'>
+                            <span>Uploading</span>
+                            <span className="loading loading-dots loading-xs -mb-2"></span>
+                        </div>
                     </div>
                 }
                 <section>

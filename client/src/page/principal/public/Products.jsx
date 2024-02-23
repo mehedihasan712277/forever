@@ -74,7 +74,19 @@ const Products = () => {
                             filtredData.map(ele => {
                                 return <div key={ele._id} className='bg-blue-100 p-2 ml:p-3 xl:p-4 rounded-md hover:shadow-xl transition duration-150'>
                                     <div className='w-32 mm:w-40 lg:w-44 xl:w-48 h-full flex flex-col justify-between'>
-                                        <Link to={`/products/item`} state={{ productId: ele._id, productName: ele.productName, description: ele.description, img1: ele.img1, img2: ele.img2, img3: ele.img3, img4: ele.img4, regularPrice: ele.regularPrice, reducedPrice: ele.reducedPrice }}>
+                                        <Link to={`/products/item`} state={
+                                            {
+                                                productId: ele._id,
+                                                productName: ele.productName,
+                                                description: ele.description,
+                                                img1: ele.img1,
+                                                img2: ele.img2,
+                                                img3: ele.img3,
+                                                img4: ele.img4,
+                                                regularPrice: ele.regularPrice,
+                                                reducedPrice: ele.reducedPrice
+                                            }
+                                        }>
                                             <div className='h-36 lg:h-40 xl:h-52 bg-white rounded-md'>
                                                 <img src={ele.img1} alt="img" className='h-36 lg:h-40 xl:h-52 w-full rounded-md' />
                                             </div>
@@ -95,12 +107,40 @@ const Products = () => {
                                         <div className='flex flex-col gap-1 pt-2'>
                                             <button className='btn btn-neutral btn-sm w-full btn-outline'
                                                 onClick={() => {
-                                                    addtoCart({ productId: ele._id, productName: ele.productName, description: ele.description, img1: ele.img1, img2: ele.img2, img3: ele.img3, img4: ele.img4, regularPrice: ele.regularPrice, reducedPrice: ele.reducedPrice, price: ele.reducedPrice })
+                                                    addtoCart({
+                                                        productId: ele._id,
+                                                        productName: ele.productName,
+                                                        description: ele.description,
+                                                        img1: ele.img1,
+                                                        img2: ele.img2,
+                                                        img3: ele.img3,
+                                                        img4: ele.img4,
+                                                        regularPrice: ele.regularPrice,
+                                                        reducedPrice: ele.reducedPrice,
+                                                        price: ele.reducedPrice
+                                                    })
                                                 }}
                                             >
                                                 Add to Cart
                                             </button>
-                                            <Link to="/address" state={{ info: [{ productId: ele._id, productName: ele.productName, description: ele.description, img1: ele.img1, img2: ele.img2, img3: ele.img3, img4: ele.img4, regularPrice: ele.regularPrice, reducedPrice: ele.reducedPrice }], price: ele.reducedPrice }}>
+                                            <Link to="/address" state={
+                                                {
+                                                    info: [
+                                                        {
+                                                            productId: ele._id,
+                                                            productName: ele.productName,
+                                                            description: ele.description,
+                                                            img1: ele.img1,
+                                                            img2: ele.img2,
+                                                            img3: ele.img3,
+                                                            img4: ele.img4,
+                                                            regularPrice: ele.regularPrice,
+                                                            reducedPrice: ele.reducedPrice
+                                                        }
+                                                    ],
+                                                    price: ele.reducedPrice
+                                                }
+                                            }>
                                                 <button className='btn btn-neutral btn-sm w-full btn-outline'>
                                                     Buy now
                                                 </button>

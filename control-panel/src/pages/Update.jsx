@@ -1,15 +1,16 @@
 import axios from 'axios';
 import React, { useState } from 'react'
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 
 const Update = () => {
-    const [loading, setLoading] = useState(false)
+    const [loading, setLoading] = useState(false);
+    const navigate = useNavigate();
     const location = useLocation();
 
     const handleAUpdateProduct = (event) => {
         event.preventDefault();
-        // setLoading(true);
+        setLoading(true);
 
         const form = event.target;
         const productName = form.productName.value;
@@ -35,17 +36,24 @@ const Update = () => {
             sold,
             category
         }
-        // axios.post(`https://server-forever.vercel.app/control`, info)
-        //     .then(res => {
-        //         Swal.fire({
-        //             title: "Success",
-        //             text: "Product added successfully",
-        //             icon: "success"
-        //         });
-        //         setLoading(false);
-        //         form.reset();
-        //     })
-        console.log(info);
+        axios.put(`https://server-forever.vercel.app/control/${location.state.id}`, info)
+            .then(res => {
+                Swal.fire({
+                    title: "Success",
+                    text: "Product Updated successfully",
+                    icon: "success"
+                });
+                setLoading(false);
+                navigate("/allproducts")
+            })
+        // console.log(info);
+    }
+    if (loading) {
+        return <div className='fixed top-0 left-0 w-full h-screen z-20 text-center' style={{ background: 'linear-gradient(to right, rgba(255,255,255,0.7), rgba(255,255,255,0.7))' }}>
+            <div className='flex items-center justify-center h-full'>
+                <div class="px-4 py-2 text-sm font-medium leading-none text-center text-white bg-cyan-500 rounded-full animate-pulse dark:bg-blue-900 dark:text-blue-200">Updating...</div>
+            </div>
+        </div>
     }
     return (
         <>
@@ -107,7 +115,7 @@ const Update = () => {
                         </div>
                         <div className="flex items-center justify-center">
                             <button type="submit" className="text-cyan-500 inline-flex items-center hover:text-white border border-cyan-500 hover:bg-cyan-500 font-medium rounded-lg text-sm px-5 py-2.5 text-center">
-                                Add
+                                Save Changes
                             </button>
                         </div>
                     </form>
