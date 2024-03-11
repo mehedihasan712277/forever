@@ -110,6 +110,8 @@ const EditProfile = () => {
 
         const address = {
             userId: user.uid,
+            userName: user.displayName,
+            userEmail: user.email,
             house,
             policeStation,
             district,

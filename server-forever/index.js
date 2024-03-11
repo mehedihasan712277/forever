@@ -2,17 +2,21 @@ const express = require('express');
 const cors = require('cors');
 require('dotenv').config();
 const { MongoClient, ServerApiVersion, ObjectId } = require('mongodb');
+const TelegramBot = require('node-telegram-bot-api');
 const app = express();
 const port = process.env.PORT || 5000;
-
+const botToken = '7141000153:AAE4m02ifie3d2EQtzGrjuEaYw0EexDRQfw';
+const chatId = '-4171732298';
 //middleware
 app.use(cors());
 app.use(express.json());
 
-
+// -4171732298
+// 7141000153:AAE4m02ifie3d2EQtzGrjuEaYw0EexDRQfw
 // Mvzm8G0MWJy4BHkt
 // forever
 
+const bot = new TelegramBot(botToken);
 
 
 const uri = "mongodb+srv://forever:Mvzm8G0MWJy4BHkt@cluster0.i0wokhn.mongodb.net/?retryWrites=true&w=majority";
@@ -112,6 +116,8 @@ async function run() {
             const options = { ordered: true };
             const result = await database3.insertMany(data, options)
             res.send(result);
+            const message = `New order received for ${data.length} product(s)\n${data.map(ele => `${ele.productName}`).join("\n")}`;
+            await bot.sendMessage(chatId, message);
         })
         app.get("/order", async (req, res) => {
             const query = req.query.uid;

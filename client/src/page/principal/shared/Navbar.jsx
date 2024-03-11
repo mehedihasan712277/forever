@@ -20,7 +20,7 @@ const Navbar = () => {
                     </p>
                 </div>
                 <div className="flex-none space-x-3 sm:space-x-4">
-                    <Link to="/">Blog</Link>
+                    <Link to="/blog">Blog</Link>
                     {
                         user && <Link to="/order">Orders</Link>
 

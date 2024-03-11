@@ -182,7 +182,7 @@ const Orders = () => {
                                                                         <>
                                                                             <div>{ele.status === "placed" && <button onClick={() => handleStatus("confirmed", ele.tuid)} className="btn border-yellow-300 bg-yellow-300 btn-sm rounded-full w-24">Confirm</button>}</div>
                                                                             <div>{ele.status === "confirmed" && <button onClick={() => handleStatus("processing", ele.tuid)} className="btn border-green-400 bg-green-400 btn-sm rounded-full w-24">Send</button>}</div>
-                                                                            <div>{ele.status === "processing" && <button onClick={() => handleStatus("delivered", ele.tuid)} className="btn border-red-500 bg-red-500 btn-sm rounded-full w-24">Completed</button>}</div>
+                                                                            <div>{ele.status === "processing" && <button onClick={() => handleStatus("delivered", ele.tuid)} className="btn border-red-400 bg-red-400 btn-sm rounded-full w-24">Completed</button>}</div>
                                                                         </>
                                                                         :
                                                                         ""
@@ -190,7 +190,7 @@ const Orders = () => {
                                                                     <>
                                                                         <div>{ele.status === "placed" && <button onClick={() => handleStatus("confirmed", ele.tuid)} className="btn border-yellow-300 bg-yellow-300 btn-sm rounded-full w-24">Confirm</button>}</div>
                                                                         <div>{ele.status === "confirmed" && <button onClick={() => handleStatus("processing", ele.tuid)} className="btn border-green-400 bg-green-400 btn-sm rounded-full w-24">Send</button>}</div>
-                                                                        <div>{ele.status === "processing" && <button onClick={() => handleStatus("delivered", ele.tuid)} className="btn border-red-500 bg-red-500 btn-sm rounded-full w-24">Completed</button>}</div>
+                                                                        <div>{ele.status === "processing" && <button onClick={() => handleStatus("delivered", ele.tuid)} className="btn border-red-400 bg-red-400 btn-sm rounded-full w-24">Completed</button>}</div>
                                                                     </>
                                                             }
                                                         </th>

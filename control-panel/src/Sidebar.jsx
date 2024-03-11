@@ -1,8 +1,13 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { NavLink } from 'react-router-dom'
-import { FaCartArrowDown, FaImage, FaPlusCircle, FaShoppingBag, FaShoppingCart } from "react-icons/fa";
+import { FaCartArrowDown, FaImage, FaPlusCircle, FaShoppingBag, FaShoppingCart, FaUpload, FaUser } from "react-icons/fa";
 
 const Sidebar = () => {
+    const [isOpen, setIsOpen] = useState(false);
+
+    const toggleAccordion = () => {
+        setIsOpen(!isOpen);
+    };
     return (
         <>
             <div>
@@ -41,6 +46,18 @@ const Sidebar = () => {
                         <div className='flex items-center gap-2 hover:bg-cyan-100 hover:text-gray-800 px-6 p-2 font-bold m-2 rounded-full'>
                             <p><FaImage /></p>
                             <p>Banner</p>
+                        </div>
+                    </NavLink>
+                    <NavLink to="/userInfo" className={({ isActive }) => isActive ? " text-cyan-500" : " text-gray-500"}>
+                        <div className='flex items-center gap-2 hover:bg-cyan-100 hover:text-gray-800 px-6 p-2 font-bold m-2 rounded-full'>
+                            <p><FaUser /></p>
+                            <p>User Info</p>
+                        </div>
+                    </NavLink>
+                    <NavLink to="/post" className={({ isActive }) => isActive ? " text-cyan-500" : " text-gray-500"}>
+                        <div className='flex items-center gap-2 hover:bg-cyan-100 hover:text-gray-800 px-6 p-2 font-bold m-2 rounded-full'>
+                            <p><FaUpload /></p>
+                            <p>Post Blog</p>
                         </div>
                     </NavLink>
                 </div>

@@ -9,6 +9,8 @@ import Carts from './pages/Carts'
 import Banner from './pages/Banner'
 import Details from './pages/Details'
 import Update from './pages/Update'
+import User from './pages/User'
+import Post from './pages/Post'
 
 
 const allRoute = createBrowserRouter([
@@ -44,6 +46,14 @@ const allRoute = createBrowserRouter([
       {
         path: "/update/:id",
         element: <Update></Update>
+      },
+      {
+        path: "/userInfo",
+        element: <User></User>
+      },
+      {
+        path: "/post",
+        element: <Post></Post>
       }
     ]
   }

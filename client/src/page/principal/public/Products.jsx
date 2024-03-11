@@ -3,6 +3,7 @@ import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../auxiliary/AuthProvider';
 import Swal from 'sweetalert2';
+import { BsCart3, BsFillCartCheckFill } from "react-icons/bs";
 
 const Products = () => {
     const { user, changeX } = useContext(AuthContext);
@@ -56,9 +57,9 @@ const Products = () => {
         }
     }
     return (
-        <>
-            <div className='py-6 lg:pb-32 lg:pt-10 sm:px-4 md:px-16 xl:px-32'>
-                <div className='flex justify-center gap-2 py-2 md:py-6 px-1 flex-wrap sticky top-0 bg-white'>
+        <div className='bg-gray-50 mt-6 xl:mt-20'>
+            <div className='pt-2 lg:pb-32 lg:pt-10 sm:px-4 md:px-16 xl:px-32'>
+                <div className='flex justify-center gap-2 py-2 md:py-6 px-1 flex-wrap sticky top-0 bg-gray-50'>
                     <button className='btn btn-outline btn-neutral btn-xs lg:btn-md' onClick={() => filter("all")}>All</button>
                     <button className='btn btn-outline btn-neutral btn-xs lg:btn-md' onClick={() => filter("skin")}>Skin</button>
                     <button className='btn btn-outline btn-neutral btn-xs lg:btn-md' onClick={() => filter("nutrition")}>Nutrition</button>
@@ -72,8 +73,8 @@ const Products = () => {
                     {
                         filtredData.length ?
                             filtredData.map(ele => {
-                                return <div key={ele._id} className='bg-blue-100 p-2 ml:p-3 xl:p-4 rounded-md hover:shadow-xl transition duration-150'>
-                                    <div className='w-32 mm:w-40 lg:w-44 xl:w-48 h-full flex flex-col justify-between'>
+                                return <div key={ele._id} className='bg-white p-2 ml:p-3 xl:p-4 rounded-md shadow-md hover:shadow-xl transition duration-150'>
+                                    <div className='w-28 ms:w-36 mm:w-40 lg:w-44 xl:w-48 h-full flex flex-col justify-between'>
                                         <Link to={`/products/item`} state={
                                             {
                                                 productId: ele._id,
@@ -103,9 +104,10 @@ const Products = () => {
                                             </div>
                                             <p>Sold: {ele.sold}</p>
                                         </Link>
+                                        {/* ---------------------------buttons-------------------------- */}
 
                                         <div className='flex flex-col gap-1 pt-2'>
-                                            <button className='btn btn-neutral btn-sm w-full btn-outline'
+                                            <button className='btn btn-neutral btn-sm btn-outline w-full'
                                                 onClick={() => {
                                                     addtoCart({
                                                         productId: ele._id,
@@ -121,7 +123,7 @@ const Products = () => {
                                                     })
                                                 }}
                                             >
-                                                Add to Cart
+                                                Add to cart
                                             </button>
                                             <Link to="/address" state={
                                                 {
@@ -141,7 +143,7 @@ const Products = () => {
                                                     price: ele.reducedPrice
                                                 }
                                             }>
-                                                <button className='btn btn-neutral btn-sm w-full btn-outline'>
+                                                <button className='btn btn-neutral btn-sm btn-outline w-full'>
                                                     Buy now
                                                 </button>
                                             </Link>
@@ -156,7 +158,7 @@ const Products = () => {
                     }
                 </div>
             </div>
-        </>
+        </div>
     )
 }
 
