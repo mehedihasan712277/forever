@@ -1,10 +1,13 @@
 import React, { useContext, useState } from 'react'
 import { AuthContext } from '../../auxiliary/AuthProvider';
 import axios from 'axios';
+import Swal from 'sweetalert2';
 
 const EditProfile = () => {
     const { user, changeY } = useContext(AuthContext);
     const [district, setDistrict] = useState([]);
+    const [err, setErr] = useState("");
+    const [loading, setLoading] = useState(false);
     const districtData = [
         "1Dhaka",
         "1Faridpur",
@@ -118,15 +121,32 @@ const EditProfile = () => {
             division,
             phone,
         }
-
-        axios.post(`https://server-forever.vercel.app/userAddress`, address)
-            .then(res => {
-                form.reset();
-                changeY();
-            })
+        setLoading(true);
+        if (phone.length === 11) {
+            axios.post(`https://server-forever.vercel.app/userAddress`, address)
+                .then(res => {
+                    form.reset();
+                    changeY();
+                    setLoading(false);
+                })
+        }
+        else {
+            setErr("Invalid phone number");
+            setLoading(false);
+        }
     }
     return (
         <>
+            {
+                loading &&
+                <div className='fixed top-0 left-0 w-full h-screen z-20 text-center' style={{ background: 'linear-gradient(to right, rgba(0,0,0,0.7), rgba(0,0,0,0.7))' }}>
+                    {/* <span className="absolute -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2 bg-cyan-500 loading loading-infinity loading-lg"></span> */}
+                    <div className='text-white absolute -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2'>
+                        <span>Please Wait</span>
+                        <span className="loading loading-dots loading-xs -mb-2"></span>
+                    </div>
+                </div>
+            }
             <div>
                 <form className='flex flex-col gap-2 items-center pt-6 pb-20' onSubmit={handleEdit}>
                     <p>Set your address for fast order process</p>
@@ -160,8 +180,9 @@ const EditProfile = () => {
                     </div >
 
 
-                    <input className='bg-blue-100 p-2 rounded-sm w-64 mm:w-72' name="phone" type="number" placeholder='Phone number' required />
+                    <input onChange={event => (event.target.value.length === 11) && setErr("")} className='bg-blue-100 p-2 rounded-sm w-64 mm:w-72' name="phone" type="number" placeholder='Phone number' required />
                     <button type='submit' className='btn btn-neutral btn-outline'>Submit</button>
+                    <p>{err}</p>
                 </form>
             </div>
         </>
