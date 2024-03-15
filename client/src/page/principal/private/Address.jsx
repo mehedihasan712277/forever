@@ -16,14 +16,15 @@ const Address = () => {
 
 
     useEffect(() => {
+        window.scrollTo(0, 0);
         axios.get(`https://server-forever.vercel.app/userAddress/${user.uid}`)
             .then(res => {
                 setData(res.data);
-                setLoading(false)
+                setLoading(false);
             })
     }, [])
     if (loading) {
-        return <div>loading</div>
+        return <div className='h-screen flex justify-center items-center'>loading...</div>
     }
     const districtData = [
         "1Dhaka",
