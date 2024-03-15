@@ -32,7 +32,7 @@ const Orders = () => {
     }
 
     return (
-        <>
+        <div className='min-h-[70vh]'>
             {
                 data.length > 0 ?
                     <div className='px-2 sm:px-8 md:px-12 lg:px-20 xl:px-32'>
@@ -83,7 +83,7 @@ const Orders = () => {
                     </div>
             }
 
-        </>
+        </div>
     )
 }
 

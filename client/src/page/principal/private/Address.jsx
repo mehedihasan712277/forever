@@ -223,7 +223,7 @@ const Address = () => {
     }
     return (
         <>
-            <div>
+            <div className='min-h-[70vh]'>
                 <form className='flex flex-col gap-2 items-center pt-6 pb-20' onSubmit={handleOrder}>
                     <p className='font-semibold text-2xl mb-6'>Enter your address here</p>
                     <input className='bg-blue-100 p-2 rounded-sm w-80' defaultValue={data?.house} name="house" type="text" placeholder='House & local area name' required />
