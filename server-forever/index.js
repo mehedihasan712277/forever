@@ -64,7 +64,7 @@ async function run() {
             const result = await data.toArray();
             res.send(result);
         })
-        //--------------
+
         app.get("/cartL/:id", async (req, res) => {
             const id = req.params.id;
             const query = { userId: id }
@@ -72,7 +72,7 @@ async function run() {
             const result = await data.toArray();
             res.send(result);
         })
-        //--------------
+
         app.delete("/cart/:id", async (req, res) => {
             const id = req.params.id;
             const filter = { _id: new ObjectId(id) };
@@ -80,6 +80,19 @@ async function run() {
             res.send(result);
         })
 
+        app.put("/cart/:id", async (req, res) => {
+            const id = req.params.id;
+            const filter = { _id: new ObjectId(id) };
+            const data = req.body;
+            const options = { upsert: true };
+            const updatedData = {
+                $set: {
+                    quantity: data.quantity
+                }
+            }
+            const result = await database2.updateOne(filter, updatedData, options);
+            res.send(result);
+        })
         //profile------------------------------------------------
         app.post("/userAddress", async (req, res) => {
             const data = req.body;

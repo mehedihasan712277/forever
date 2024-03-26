@@ -38,9 +38,9 @@ const Invoice = ({ tuid }) => {
 
 
         //------------------------table--------------------
-        let tableInfo = data.map(obj => [obj.productName, obj.regularPrice, obj.reducedPrice])
+        let tableInfo = data.map(obj => [obj.productName, obj.quantity, `${obj.reducedPrice} X ${obj.quantity}`])
         const tableData = [
-            ['Item Name', 'Regular Price', 'Reduced Price',],
+            ['Item Name', 'Quantity', 'Reduced Price',],
             // [name[0], 2, 10, 20],
             // [name[1], 1, 20, 20],
             // [name[2], 3, 15, 45]

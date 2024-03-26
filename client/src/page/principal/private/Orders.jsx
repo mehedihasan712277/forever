@@ -61,6 +61,7 @@ const Orders = () => {
                                                         <div className='text-blue-900'>
                                                             <p className='font-semibold'>{e.productName}</p>
                                                             <p className=''>{e.reducedPrice} Tk</p>
+                                                            <p className=''>Quantity: {e.quantity}</p>
                                                         </div>
                                                     </div>
                                                 </div>

@@ -194,6 +194,7 @@ const Address = () => {
                 img4: ele.img4,
                 regularPrice: ele.regularPrice,
                 reducedPrice: ele.reducedPrice,
+                quantity: ele.quantity,
                 isSelected: ele.isSelected,
                 productId: ele.productId,
                 status: "placed"

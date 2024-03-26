@@ -115,7 +115,7 @@ const Products = () => {
                                                 </div>
                                                 <p>Sold: {ele.sold}</p>
                                             </Link>
-                                            {/* ---------------------------buttons-------------------------- */}
+                                            {/* ---------------------------Cart buttons-------------------------- */}
 
                                             <div className='flex flex-col gap-1 pt-2'>
                                                 <button className='btn btn-neutral btn-sm btn-outline w-full'
@@ -130,12 +130,14 @@ const Products = () => {
                                                             img4: ele.img4,
                                                             regularPrice: ele.regularPrice,
                                                             reducedPrice: ele.reducedPrice,
-                                                            price: ele.reducedPrice
+                                                            price: ele.reducedPrice,
+                                                            quantity: 1
                                                         })
                                                     }}
                                                 >
                                                     Add to cart
                                                 </button>
+                                                {/* ----------------------buy now button------------------- */}
                                                 <Link to="/address" state={
                                                     {
                                                         info: [
@@ -148,7 +150,8 @@ const Products = () => {
                                                                 img3: ele.img3,
                                                                 img4: ele.img4,
                                                                 regularPrice: ele.regularPrice,
-                                                                reducedPrice: ele.reducedPrice
+                                                                reducedPrice: ele.reducedPrice,
+                                                                quantity: 1
                                                             }
                                                         ],
                                                         price: ele.reducedPrice
