@@ -36,6 +36,7 @@ async function run() {
         const database2 = client.db("foreverDB").collection("cart");
         const database3 = client.db("foreverDB").collection("order");
         const database4 = client.db("foreverDB").collection("address");
+        const database5 = client.db("foreverDB").collection("banner");
 
         app.get("/", (req, res) => {
             res.send("server is running ok")
@@ -158,7 +159,9 @@ async function run() {
             const result = await database3.deleteOne(filter);
             res.send(result);
         })
-        // control panel------------------------------------------
+
+
+        // control panel------------------------------------------------------------------------------------
         app.post("/control", async (req, res) => {
             const data = req.body;
             const result = await database.insertOne(data)
@@ -204,6 +207,22 @@ async function run() {
             const result = await database3.updateMany(filter, updatedData);
             res.send(result);
 
+        })
+        app.put("/banner", async (req, res) => {
+            const data = req.body;
+            const filter = { name: "link" };
+            const options = { upsert: true };
+            const updatedData = {
+                $set: {
+                    links: data.links
+                }
+            }
+            const result = await database5.updateOne(filter, updatedData, options);
+            res.send(result);
+        })
+        app.get("/banner", async (req, res) => {
+            const result = await database5.find().toArray();
+            res.send(result);
         })
         app.get("/control_cart", async (req, res) => {
             const result = await database2.find().toArray();
