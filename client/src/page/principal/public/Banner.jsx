@@ -1,5 +1,6 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Swiper, SwiperSlide } from 'swiper/react';
+import axios from 'axios';
 
 import 'swiper/css';
 import 'swiper/css/effect-fade';
@@ -16,6 +17,14 @@ import { EffectFade, Autoplay, Pagination, Navigation } from 'swiper/modules';
 
 
 const Banner = () => {
+    const [data, setData] = useState([]);
+
+    useEffect(() => {
+        axios.get(`https://server-forever.vercel.app/banner`)
+            .then(res => {
+                setData(res.data[0].links);
+            })
+    }, [])
     return (
         <>
             <div className='sm:px-4 md:px-8 lg:px-12 xl:px-20 select-none'>
@@ -35,12 +44,17 @@ const Banner = () => {
                     className="mySwiper"
                 >
                     <div>
-                        <SwiperSlide>
-                            <div className='w-full h-[200px] sm:h-[300px] md:h-[350px] lg:h-[425px] xl:h-[500px]' >
-                                <img src={banner1} alt="img" className='w-full h-[200px] sm:h-[300px] md:h-[350px] lg:h-[425px] xl:h-[500px]' />
-                            </div>
-                        </SwiperSlide>
-                        <SwiperSlide>
+                        {
+                            data.map((ele, index) => {
+                                return <SwiperSlide key={index}>
+                                    <div className='w-full h-[200px] sm:h-[300px] md:h-[350px] lg:h-[425px] xl:h-[500px]' >
+                                        <img src={ele} alt="img" className='w-full h-[200px] sm:h-[300px] md:h-[350px] lg:h-[425px] xl:h-[500px]' />
+                                    </div>
+                                </SwiperSlide>
+                            })
+                        }
+
+                        {/* <SwiperSlide>
                             <div className='w-full h-[200px] sm:h-[300px] md:h-[350px] lg:h-[425px] xl:h-[500px]' >
                                 <img src={banner2} alt="img" className='w-full h-[200px] sm:h-[300px] md:h-[350px] lg:h-[425px] xl:h-[500px]' />
                             </div>
@@ -49,7 +63,7 @@ const Banner = () => {
                             <div className='w-full h-[200px] sm:h-[300px] md:h-[350px] lg:h-[425px] xl:h-[500px]' >
                                 <img src={banner3} alt="img" className='w-full h-[200px] sm:h-[300px] md:h-[350px] lg:h-[425px] xl:h-[500px]' />
                             </div>
-                        </SwiperSlide>
+                        </SwiperSlide> */}
                     </div>
                 </Swiper>
             </div>

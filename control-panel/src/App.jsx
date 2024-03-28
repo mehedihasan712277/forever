@@ -11,6 +11,7 @@ import Details from './pages/Details'
 import Update from './pages/Update'
 import User from './pages/User'
 import Post from './pages/Post'
+import Blog from './pages/Blog'
 
 
 const allRoute = createBrowserRouter([
@@ -50,6 +51,10 @@ const allRoute = createBrowserRouter([
       {
         path: "/userInfo",
         element: <User></User>
+      },
+      {
+        path: "/blog",
+        element: <Blog></Blog>
       },
       {
         path: "/post",

@@ -12,6 +12,7 @@ import Orders from './page/principal/private/Orders';
 import Private from './page/auxiliary/Private';
 import Profile from './page/principal/private/Profile'
 import Address from './page/principal/private/Address'
+import Blogs from './page/blog/Blogs'
 import Blog from './page/blog/Blog'
 
 const allRoute = createBrowserRouter([
@@ -54,8 +55,12 @@ const allRoute = createBrowserRouter([
       },
       {
         path: "/blog",
-        element: <Blog></Blog>
+        element: <Blogs></Blogs>
       },
+      {
+        path: "/blog/:id",
+        element: <Blog></Blog>
+      }
     ]
   }
 ])

@@ -1,13 +1,13 @@
 import React, { useState } from 'react'
 import { NavLink } from 'react-router-dom'
-import { FaCartArrowDown, FaImage, FaPlusCircle, FaShoppingBag, FaShoppingCart, FaUpload, FaUser } from "react-icons/fa";
+import { FaBlogger, FaCartArrowDown, FaImage, FaPlusCircle, FaShoppingBag, FaShoppingCart, FaUpload, FaUser } from "react-icons/fa";
 
 const Sidebar = () => {
-    const [isOpen, setIsOpen] = useState(false);
+    // const [isOpen, setIsOpen] = useState(false);
 
-    const toggleAccordion = () => {
-        setIsOpen(!isOpen);
-    };
+    // const toggleAccordion = () => {
+    //     setIsOpen(!isOpen);
+    // };
     return (
         <>
             <div>
@@ -17,7 +17,7 @@ const Sidebar = () => {
                     <p>Sakib Akondo</p>
                 </div>
                 {/* vertical---------------------- */}
-                <div className='fixed left-0 top-[15vh]  w-64 h-full'>
+                <div className='fixed left-0 top-[15vh]  w-64 h-full scroll-auto'>
                     <NavLink to="/" className={({ isActive }) => isActive ? " text-cyan-500" : " text-gray-500"}>
                         <div className='flex items-center gap-2 hover:bg-cyan-100 hover:text-gray-800 px-6 p-2 font-bold m-2 rounded-full'>
                             <p><FaCartArrowDown /></p>
@@ -54,14 +54,21 @@ const Sidebar = () => {
                             <p>User Info</p>
                         </div>
                     </NavLink>
+                    <NavLink to="/blog" className={({ isActive }) => isActive ? " text-cyan-500" : " text-gray-500"}>
+                        <div className='flex items-center gap-2 hover:bg-cyan-100 hover:text-gray-800 px-6 p-2 font-bold m-2 rounded-full'>
+                            <p><FaBlogger /></p>
+                            <p>My Blog</p>
+                        </div>
+                    </NavLink>
                     <NavLink to="/post" className={({ isActive }) => isActive ? " text-cyan-500" : " text-gray-500"}>
                         <div className='flex items-center gap-2 hover:bg-cyan-100 hover:text-gray-800 px-6 p-2 font-bold m-2 rounded-full'>
                             <p><FaUpload /></p>
-                            <p>Post Blog</p>
+                            <p>Post New</p>
                         </div>
                     </NavLink>
                 </div>
-            </div></>
+            </div>
+        </>
     )
 }
 

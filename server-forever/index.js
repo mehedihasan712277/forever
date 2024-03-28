@@ -37,6 +37,7 @@ async function run() {
         const database3 = client.db("foreverDB").collection("order");
         const database4 = client.db("foreverDB").collection("address");
         const database5 = client.db("foreverDB").collection("banner");
+        const database6 = client.db("foreverDB").collection("blog");
 
         app.get("/", (req, res) => {
             res.send("server is running ok")
@@ -65,7 +66,11 @@ async function run() {
             const result = await data.toArray();
             res.send(result);
         })
-
+        app.get("/all_cart", async (req, res) => {
+            const data = database2.find();
+            const result = await data.toArray();
+            res.send(result);
+        })
         app.get("/cartL/:id", async (req, res) => {
             const id = req.params.id;
             const query = { userId: id }
@@ -230,6 +235,22 @@ async function run() {
         })
         app.get("/control_order", async (req, res) => {
             const result = await database3.find().toArray();
+            res.send(result);
+        })
+        //blog-----------------------------------------------------------------------------------------------
+        app.post("/blog", async (req, res) => {
+            const data = req.body;
+            const result = await database6.insertOne(data)
+            res.send(result);
+        })
+        app.get("/blog", async (req, res) => {
+            const result = await database6.find().toArray();
+            res.send(result);
+        })
+        app.get("/blog/:id", async (req, res) => {
+            const id = req.params.id;
+            const filter = { _id: new ObjectId(id) }
+            const result = await database6.findOne(filter);
             res.send(result);
         })
         // await client.db("admin").command({ ping: 1 });
