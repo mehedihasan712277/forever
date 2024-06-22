@@ -1,5 +1,7 @@
 client/node_modules
-control-panel/node_modules
-server-forever/node_modules
-
 client/.env.local
+
+control-panel/node_modules
+
+server-forever/.env
+server-forever/node_modules

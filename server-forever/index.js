@@ -13,13 +13,12 @@ app.use(express.json());
 
 // -4171732298
 // 7141000153:AAE4m02ifie3d2EQtzGrjuEaYw0EexDRQfw
-// Mvzm8G0MWJy4BHkt
-// forever
+
 
 const bot = new TelegramBot(botToken);
 
 
-const uri = "mongodb+srv://forever:Mvzm8G0MWJy4BHkt@cluster0.i0wokhn.mongodb.net/?retryWrites=true&w=majority";
+const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.i0wokhn.mongodb.net/?retryWrites=true&w=majority`;
 
 const client = new MongoClient(uri, {
     serverApi: {
