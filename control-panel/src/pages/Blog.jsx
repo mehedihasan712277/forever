@@ -18,7 +18,7 @@ const Blog = () => {
     }
     return (
         <>
-            <div className='py-6'>
+            <div className='py-6 space-y-20'>
                 {
                     data.map(ele => {
                         return <div key={ele._id} className='sm:w-[500px] w-[300px] mx-auto'>
@@ -31,6 +31,9 @@ const Blog = () => {
                                         }
                                         {
                                             e.type === "banner" && <img className='sm:w-[500px] w-[300px] sm:h-64 h-44' src={e.value} alt="banner" />
+                                        }
+                                        {
+                                            e.type === "subtitle" && <p className='pb-3'>{e.value}</p>
                                         }
                                         {
                                             e.type === "text" && <p className='text-justify'>{e.value}</p>

@@ -5,7 +5,7 @@ import Swal from 'sweetalert2'
 import { FaRegFileImage, FaUpload } from "react-icons/fa";
 import { IoText } from "react-icons/io5";
 import { RiCollageFill } from "react-icons/ri";
-import { MdTitle } from "react-icons/md";
+import { MdOutlineSubtitles, MdTitle } from "react-icons/md";
 import { PiFlagBannerFill } from "react-icons/pi";
 
 const Post = () => {
@@ -14,6 +14,10 @@ const Post = () => {
 
     const addTitleField = () => {
         setFields([...fields, { type: 'title', value: '' }]);
+    };
+
+    const addSubTitleField = () => {
+        setFields([...fields, { type: 'subtitle', value: '' }]);
     };
 
     const addBannerField = () => {
@@ -65,7 +69,7 @@ const Post = () => {
             date: formattedDate,
             info: fields
         }
-        console.log(blogData);
+
         setLoading(true);
         axios.post(`https://server-forever.vercel.app/blog`, blogData)
             .then(() => {
@@ -95,7 +99,23 @@ const Post = () => {
                         <textarea
                             type="text"
                             name="textField"
-                            placeholder="Enter some text here"
+                            placeholder="Title"
+                            value={field.value}
+                            onChange={(e) => handleInputChange(index, e)}
+                            className='w-96 h-12 rounded-sm p-2'
+                        />
+                        <button onClick={() => handleFieldDelete(index)} className='btn btn-sm bg-transparent outline-none border-none shadow-none text-gray-700 hover:text-black rounded-sm text-xl'>
+                            <FaDeleteLeft />
+                        </button>
+                    </div>
+                );
+            case 'subtitle':
+                return (
+                    <div key={index} className="flex mt-2 bg-transparent">
+                        <textarea
+                            type="text"
+                            name="textField"
+                            placeholder="Sub-title"
                             value={field.value}
                             onChange={(e) => handleInputChange(index, e)}
                             className='w-96 h-12 rounded-sm p-2'
@@ -111,7 +131,7 @@ const Post = () => {
                         <textarea
                             type="text"
                             name="textField"
-                            placeholder="Enter some text here"
+                            placeholder="Write blog here"
                             value={field.value}
                             onChange={(e) => handleInputChange(index, e)}
                             className='w-96 h-52 rounded-sm p-2'
@@ -127,7 +147,7 @@ const Post = () => {
                         <input
                             type="text"
                             name="imageField"
-                            placeholder="Enter image link here"
+                            placeholder="Enter image link of banner"
                             value={field.value}
                             onChange={(e) => handleInputChange(index, e)}
                             className="w-96 rounded-sm p-2"
@@ -210,6 +230,10 @@ const Post = () => {
                     }}
                         className='btn bg-cyan-300 outline-none border-none text-lg btn-sm text-gray-600 font-bold rounded  w-fit'>
                         <PiFlagBannerFill />
+                    </button>
+                    {/* --------------------------------subtitle------------------------------------- */}
+                    <button type="button" onClick={addSubTitleField} className='btn bg-cyan-300 outline-none border-none text-lg btn-sm text-gray-600 font-bold rounded  w-fit'>
+                        <MdOutlineSubtitles />
                     </button>
                     {/* --------------------------------Text------------------------------------- */}
                     <button type="button" onClick={addTextField} className='btn bg-cyan-300 outline-none border-none text-lg btn-sm text-gray-600 font-bold rounded  w-fit'>

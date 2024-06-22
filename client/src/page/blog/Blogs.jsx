@@ -34,6 +34,9 @@ const Blogs = () => {
                       {
                         e.type === "banner" && <img className='sm:w-[500px] w-full sm:h-64 h-44' src={e.value} alt="banner" />
                       }
+                      {
+                        e.type === "subtitle" && <p className='pb-3'>{e.value}</p>
+                      }
                       {/* {
                         e.type === "text" && <p className='text-justify'>{e.value}</p>
                       } */}
